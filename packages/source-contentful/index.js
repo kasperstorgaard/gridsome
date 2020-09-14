@@ -48,6 +48,13 @@ class ContentfulSource {
         if (field.type === 'RichText') {
           resolvers[field.id] = richTextType
         }
+
+        if (field.type === 'Symbol') {
+          resolvers[field.id] = {
+            type: 'String',
+            resolve: (obj) => obj[field.id]
+          }
+        }
       }
 
       actions.addCollection({ typeName, route })
